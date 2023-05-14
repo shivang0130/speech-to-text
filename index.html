@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>speech to text final</title>
+</head>
+<body>
+    <div>
+        <h1>Voice Recognition</h1>
+        <textarea name="" id="speechtoText" cols="50" rows="5" placeholder="Your Message Here"></textarea>
+        <br>
+        <button onclick="voice()">Click to Speak</button>
+    </div>
+    <script>
+        function voice(){
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang="en-GB";
+            recognition.onresult=function(event){
+                console.log(event);
+                document.getElementById("speechtoText").value = event.results[0][0].transcript;
+            }
+            recognition.start();
+        }
+
+        var Sentiment = require('sentiment');
+        var sentiment = new Sentiment();
+        var docx = sentiment.analyze("SpeechtoText");
+        
+        console.log(docx);
+    </script>
+</body>
+</html>
